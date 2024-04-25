@@ -3,11 +3,13 @@ package com.emarra.crudProduct.services;
 import com.emarra.crudProduct.dtos.ProductDTO;
 import com.emarra.crudProduct.entities.Product;
 import com.emarra.crudProduct.repositories.ProductRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class ProductService {
@@ -25,5 +27,20 @@ public class ProductService {
     public ProductDTO findById(Long id) {
         Product product = repository.findById(id).orElseThrow();
         return new ProductDTO(product);
+    }
+
+    @Transactional
+    public ProductDTO insert(ProductDTO dto) {
+        Product product = new Product();
+        copyToEntity(product, dto);
+        product = repository.save(product);
+        return new ProductDTO(product);
+    }
+
+    private void copyToEntity(Product product, ProductDTO dto){
+        product.setName(dto.getName());
+        product.setDescription(dto.getDescription());
+        product.setPrice_in_cents(dto.getPrice_in_cents());
+        product.setImgUrl(dto.getImgUrl());
     }
 }

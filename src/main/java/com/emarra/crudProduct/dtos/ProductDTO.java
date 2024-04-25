@@ -14,7 +14,6 @@ public class ProductDTO {
     @NotBlank(message = "Campo requerido.")
     @Size(min = 10, message = "Campo de conter um mínimo de 10 caracteres.")
     private String description;
-    @NotBlank(message = "Campo requerido.")
     @Positive(message = "Campo deve possuir numero maior que zero.")
     private Integer price_in_cents;
     @NotBlank(message = "Campo requerido.")
