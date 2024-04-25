@@ -1,5 +1,6 @@
 package com.emarra.crudProduct.entities;
 
+<<<<<<< HEAD
 import jakarta.persistence.*;
 
 @Entity
@@ -10,6 +11,11 @@ public class Product {
     private Long id;
     private String name;
     @Column(columnDefinition = "TEXT")
+=======
+public class Product {
+    private Long id;
+    private String name;
+>>>>>>> 413e6284508a75a53d640b8b9b40f946a64e512a
     private String description;
     private Integer price_in_cents;
     private String imgUrl;
