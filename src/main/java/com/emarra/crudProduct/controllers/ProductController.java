@@ -6,6 +6,7 @@ import com.emarra.crudProduct.services.ProductService;
 import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -42,4 +43,11 @@ public class ProductController {
                 .toUri();
         return ResponseEntity.created(uri).body(dto);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<ProductDTO> delete(@PathVariable Long id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
