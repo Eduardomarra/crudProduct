@@ -3,6 +3,7 @@ package com.emarra.crudProduct.services;
 import com.emarra.crudProduct.dtos.ProductDTO;
 import com.emarra.crudProduct.entities.Product;
 import com.emarra.crudProduct.repositories.ProductRepository;
+import com.emarra.crudProduct.services.exceptions.ResourceNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,7 +26,7 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id) {
-        Product product = repository.findById(id).orElseThrow();
+        Product product = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
         return new ProductDTO(product);
     }
 
